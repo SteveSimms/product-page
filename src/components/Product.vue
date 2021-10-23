@@ -3,7 +3,8 @@ import { ref, reactive,computed } from 'vue'
 
 const product = 'Infinity Stones'
 
-const brand = 'Elders'  
+const brand = 'V:' 
+ 
 // let image  =  ref('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5K6I_uVfKA-nVEkAz4R-pwHaE8%26pid%3DApi&f=1' )
 
 let selectedVariant = ref(0)
@@ -64,8 +65,13 @@ let inStock = computed(()=>{
 
 })
 
-let saleItem = computed(()=>{
+let itemOnSale = computed(()=>{
     return variants[selectedVariant.value].onSale
+
+})
+
+let displayVariantName = computed(()=>{
+    return variants[selectedVariant.value].name
 
 })
 
@@ -97,9 +103,9 @@ let devloperLinks = {
         </div>
         <div class="product-info">
             <h1>{{ productBrand }}</h1>
-            <p v-if="inStock">In Stock </p>
-                <p v-else>Out of Stock</p>
-                <p v-if="saleItem"> {{ sale }} </p>
+            <p v-if="inStock">In Stock: {{ displayVariantName }}</p>
+                <p v-else>Out of Stock: {{ displayVariantName }}</p>
+                <p v-if="itemOnSale"> {{ sale }} </p>
                 <ul>
                     <li v-for=" detail in details ">{{ detail }}</li>
                 </ul>
