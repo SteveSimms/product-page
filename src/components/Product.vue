@@ -1,9 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const product = 'Infinity Stones'
 
-let image  =  ref('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5K6I_uVfKA-nVEkAz4R-pwHaE8%26pid%3DApi&f=1' )
+const brand = 'Elders'  
+// let image  =  ref('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5K6I_uVfKA-nVEkAz4R-pwHaE8%26pid%3DApi&f=1' )
+
+let selectedVariant = ref(0)
 
 let imageStore = {
     powerStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.5-YOC8OOHRlsj-b-YJB9QAHaE8%26pid%3DApi&f=1',
@@ -17,18 +20,20 @@ let imageStore = {
 let cart = ref(0)
 
 let inventory = 0
-let inStock = false
+
 
 let details = ['100% primordial materials', '0% dark magic', 'dark matter included']
 
 let variants = [
-    {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone},
-    {id:1, name: 'Power Stone', color: 'Purple',universe: 'Earth-616',image: imageStore.powerStone},
-    {id:2, name: 'Time Stone', color: 'Green',universe: 'Earth-616',image: imageStore.timeStone},
-    {id:3, name: 'Space Stone', color: 'Blue',universe: 'Earth-616',image: imageStore.spaceStone},
-    {id:4, name: 'Mind Stone', color: 'Yellow',universe: 'Earth-616',image: imageStore.mindStone},
-    {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone}
+    {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone,quantity: 10},
+    {id:1, name: 'Power Stone', color: 'Purple',universe: 'Earth-616',image: imageStore.powerStone, quantity: 4},
+    {id:2, name: 'Time Stone', color: 'Green',universe: 'Earth-616',image: imageStore.timeStone,quantity: 0},
+    {id:3, name: 'Space Stone', color: 'Blue',universe: 'Earth-616',image: imageStore.spaceStone,quantity: 4},
+    {id:4, name: 'Mind Stone', color: 'Yellow',universe: 'Earth-616',image: imageStore.mindStone, quantity: 1},
+    {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone, quantity: 0}
     ]
+
+
 
 const addToCart = () =>{
     cart.value++
@@ -39,14 +44,25 @@ const subtractFromCart = () =>{
     cart.value--
 }
 
-const updateImage = (variantImage) => {
-image.value = variantImage
-console.log('image change ')
 
+
+let productBrand = computed(() => {
+    return `${brand} 
+           ${product}`
+})
+
+let updateVariant = (index) => {
+    selectedVariant.value = index
 }
 
+let image = computed(() => {
+    return variants[selectedVariant.value].image
+})
 
+let inStock = computed(()=>{
+    return variants[selectedVariant.value].quantity
 
+})
 
 
 const onSale = false
@@ -62,27 +78,27 @@ let devloperLinks = {
 <div class="product-display">
     <div class="product-container">
         <div class="product-image">
-            <img :src="image">    
+            <img :src="image"  :class="{'out-of-stock-img': !inStock  }">    
         </div>
         <div class="product-info">
-            <h1>{{ product }}</h1>
-            <p v-if="inventory > 10">In Stock</p>
-            <p v-else-if="inventory < 10 && inventory > 0"> Almost Sold Out</p>
+            <h1>{{ productBrand }}</h1>
+            <p v-if="inStock">In Stock </p>
                 <p v-else>Out of Stock</p>
                 <p v-if="onSale"> On Sale </p>
                 <ul>
                     <li v-for=" detail in details ">{{ detail }}</li>
                 </ul>
-                <div v-for="variant of variants" 
+                <div v-for="(variant,index) of variants" 
                 :key="variant.id"
-                 @mouseover="updateImage(variant.image)" 
+                 @mouseover="updateVariant(index)"
                  class="color-circle"
                  :style="{backgroundColor: variant.color}">
-             
+                   
                  </div>
                  
                 <button 
                 @click="addToCart"
+                :class="{disabledButton: !inStock}"
                 :disabled="!inStock" 
                 class="button">Add To Cart </button>
                 <button @click="subtractFromCart" class="button">Subtract Cart</button>
