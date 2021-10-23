@@ -1,14 +1,15 @@
 <script setup>
-import { ref, reactive,computed, defineProps } from 'vue'
+import { ref, computed } from 'vue'
+import  ProductDetails  from '../components/ProductDetails.vue'
+
+// product-page\src\components\ProductDetails.vue
+
+//    import CryptoData from "@/components/CryptoData.vue";
 const props = defineProps({
   premium: {
     type: Boolean,
     required: true
-  },
-    //   details: {
-    //     type: String,
-    //     required: true
-    // }
+  }
 })
 const product = 'Infinity Stones'
 
@@ -32,7 +33,7 @@ let imageStore = {
 let inventory = 0
 
 
-let details = ref(['100% primordial materials', '0% dark magic', 'dark matter included'])
+let details = ['100% primordial materials', '0% dark magic', 'dark matter included']
 
 let variants = [
     {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone,quantity: 10, onSale: false},

@@ -1,6 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
-
 const props = defineProps({
     details: {
         type: Array,
@@ -8,7 +6,7 @@ const props = defineProps({
         
     }
 })
-
+console.log(props.details)
 
 
 </script>
@@ -16,9 +14,9 @@ const props = defineProps({
 <template>
     <div class="product-details">
                 <ul>
-                  
                     <li v-for=" detail in props.details ">{{ detail }}</li>
-                </ul>
+                </ul> 
+            
                 </div>
 
 </template>
