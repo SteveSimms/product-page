@@ -1,6 +1,11 @@
 <script setup>
-import { ref, reactive,computed } from 'vue'
-
+import { ref, reactive,computed, defineProps } from 'vue'
+const props = defineProps({
+  premium: {
+    type: Boolean,
+    required: true
+  }
+})
 const product = 'Infinity Stones'
 
 const brand = 'V:' 
@@ -18,7 +23,7 @@ let imageStore = {
     soulStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.ljPUujzTRz0864CiAL0zPwHaEK%26pid%3DApi&f=1'
 } 
 
-let cart = ref(0)
+// let cart = ref(0)
 
 let inventory = 0
 
@@ -75,6 +80,13 @@ let displayVariantName = computed(()=>{
 
 })
 
+let shipping = computed(()=>{
+        if(props.premium){
+            return 'Free'
+        }
+        return 2.99
+})
+
 
 const onSale = ref(true) 
 
@@ -95,7 +107,7 @@ let devloperLinks = {
 </script>
 
 <template>
-  <div @click="addToCart" class="cart"> Cart({{ cart }})</div>
+  <!-- <div  class="cart"> Cart({{ cart }})</div> -->
 <div class="product-display">
     <div class="product-container">
         <div class="product-image">
@@ -105,6 +117,7 @@ let devloperLinks = {
             <h1>{{ productBrand }}</h1>
             <p v-if="inStock">In Stock: {{ displayVariantName }}</p>
                 <p v-else>Out of Stock: {{ displayVariantName }}</p>
+                <p>Shipping: {{ shipping }}</p>
                 <p v-if="itemOnSale"> {{ sale }} </p>
                 <ul>
                     <li v-for=" detail in details ">{{ detail }}</li>
@@ -122,7 +135,7 @@ let devloperLinks = {
                 :class="{disabledButton: !inStock}"
                 :disabled="!inStock" 
                 class="button">Add To Cart </button>
-                <button @click="subtractFromCart" class="button">Subtract Cart</button>
+                <!-- <button @click="subtractFromCart" class="button">Subtract Cart</button> -->
         </div>
         <a :href="devloperLinks.marvelAPI">Marvel API</a>
     </div>
