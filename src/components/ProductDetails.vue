@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+const props = defineProps({ // Define the props in the component you want to send data from  then use it below in the template
     details: {
         type: Array,
         required: true

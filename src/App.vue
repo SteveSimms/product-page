@@ -6,6 +6,12 @@ import NavBar from './components/NavBar.vue'
 let cart = ref(0)
 let premium = true //passing premium to ProductDisplay component
 
+
+const getAddedItems = () =>{
+  cart.value++
+  console.log(cart.value)
+  
+}
 //Sending the prop successfully
 </script>
 
@@ -13,9 +19,9 @@ let premium = true //passing premium to ProductDisplay component
 <NavBar />
  <div  class="cart"> Cart({{ cart }})</div>
 
-<ProductDisplay :premium="premium"/> 
-<ProductDisplay />
-<ProductDisplay />
+<ProductDisplay :premium="premium" @addTocart="getAddedItems"/> 
+<ProductDisplay @addTocart="getAddedItems"/>
+<ProductDisplay @addTocart="getAddedItems"/>
 
 </template>
 

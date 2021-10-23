@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import  ProductDetails  from '../components/ProductDetails.vue'
+import App from '../App.vue'
 
 // product-page\src\components\ProductDetails.vue
 
@@ -44,13 +45,18 @@ let variants = [
     {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone, quantity: 0, onSale: false}
     ]
 
-
-
+const emits = defineEmits(['addToCart'])
+// Supposed to be emitting events 
+// const emits = defineEmits(['addToCart'])
 const addToCart = () =>{
-    cart.value++
+  
+     emits('addTocart')
 
 }
 
+const updateCart = () => {
+      cart.value++
+}
 const subtractFromCart = () =>{
     cart.value--
 }
@@ -113,6 +119,7 @@ let devloperLinks = {
 
 <template>
   <!-- <div  class="cart"> Cart({{ cart }})</div> -->
+ 
 <div class="product-display">
     <div class="product-container">
         <div class="product-image">
@@ -124,9 +131,7 @@ let devloperLinks = {
                 <p v-else>Out of Stock: {{ displayVariantName }}</p>
                 <p>Shipping: {{ shipping }}</p>
                 <p v-if="itemOnSale"> {{ sale }} </p>
-                <!-- <ul>
-                    <li v-for=" detail in details ">{{ detail }}</li>
-                </ul> -->
+           
                
                     <ProductDetails :details="details" />
                 
