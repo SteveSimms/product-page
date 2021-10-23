@@ -7,7 +7,11 @@ let image  =  ref('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ft
 
 let imageStore = {
     powerStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.5-YOC8OOHRlsj-b-YJB9QAHaE8%26pid%3DApi&f=1',
-    realityStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.5Wf6JzkJXCeTAQ98ImCqFAHaE8%26pid%3DApi&f=1'
+    realityStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.5Wf6JzkJXCeTAQ98ImCqFAHaE8%26pid%3DApi&f=1',
+    timeStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.uOFmttU91qS0iJ4PO-7DzgHaE8%26pid%3DApi&f=1',
+    spaceStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.dYgjqoFq9FGLN5Tqi8om8AHaEo%26pid%3DApi&f=1',
+    mindStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UiXkBkmkDxCtnBGdL5_2YgHaE8%26pid%3DApi&f=1',
+    soulStone: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.ljPUujzTRz0864CiAL0zPwHaEK%26pid%3DApi&f=1'
 } 
 
 let cart = ref(0)
@@ -19,7 +23,11 @@ let details = ['100% primordial materials', '0% dark magic', 'dark matter includ
 
 let variants = [
     {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone},
-    {id:1, name: 'Power Stone', color: 'Purple',universe: 'Earth-616',image: imageStore.powerStone}
+    {id:1, name: 'Power Stone', color: 'Purple',universe: 'Earth-616',image: imageStore.powerStone},
+    {id:2, name: 'Time Stone', color: 'Green',universe: 'Earth-616',image: imageStore.timeStone},
+    {id:3, name: 'Space Stone', color: 'Blue',universe: 'Earth-616',image: imageStore.spaceStone},
+    {id:4, name: 'Mind Stone', color: 'Yellow',universe: 'Earth-616',image: imageStore.mindStone},
+    {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone}
     ]
 
 const addToCart = () =>{
@@ -72,6 +80,7 @@ let devloperLinks = {
                  :style="{backgroundColor: variant.color}">
              
                  </div>
+                 
                 <button 
                 @click="addToCart"
                 :disabled="!inStock" 
