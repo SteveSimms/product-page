@@ -4,7 +4,11 @@ const props = defineProps({
   premium: {
     type: Boolean,
     required: true
-  }
+  },
+    //   details: {
+    //     type: String,
+    //     required: true
+    // }
 })
 const product = 'Infinity Stones'
 
@@ -28,7 +32,7 @@ let imageStore = {
 let inventory = 0
 
 
-let details = ['100% primordial materials', '0% dark magic', 'dark matter included']
+let details = ref(['100% primordial materials', '0% dark magic', 'dark matter included'])
 
 let variants = [
     {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone,quantity: 10, onSale: false},
@@ -81,7 +85,7 @@ let displayVariantName = computed(()=>{
 })
 
 let shipping = computed(()=>{
-        if(props.premium){
+        if(props.premium){ // need to use props before the prop name
             return 'Free'
         }
         return 2.99
@@ -119,9 +123,13 @@ let devloperLinks = {
                 <p v-else>Out of Stock: {{ displayVariantName }}</p>
                 <p>Shipping: {{ shipping }}</p>
                 <p v-if="itemOnSale"> {{ sale }} </p>
-                <ul>
+                <!-- <ul>
                     <li v-for=" detail in details ">{{ detail }}</li>
-                </ul>
+                </ul> -->
+               
+                    <ProductDetails :details="details" />
+                
+               
                 <div v-for="(variant,index) of variants" 
                 :key="variant.id"
                  @mouseover="updateVariant(index)"
