@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, reactive,computed } from 'vue'
 
 const product = 'Infinity Stones'
 
@@ -25,12 +25,12 @@ let inventory = 0
 let details = ['100% primordial materials', '0% dark magic', 'dark matter included']
 
 let variants = [
-    {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone,quantity: 10},
-    {id:1, name: 'Power Stone', color: 'Purple',universe: 'Earth-616',image: imageStore.powerStone, quantity: 4},
-    {id:2, name: 'Time Stone', color: 'Green',universe: 'Earth-616',image: imageStore.timeStone,quantity: 0},
-    {id:3, name: 'Space Stone', color: 'Blue',universe: 'Earth-616',image: imageStore.spaceStone,quantity: 4},
-    {id:4, name: 'Mind Stone', color: 'Yellow',universe: 'Earth-616',image: imageStore.mindStone, quantity: 1},
-    {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone, quantity: 0}
+    {id:0, name: 'Reality Stone', color: 'Red',universe: 'Earth-616',image: imageStore.realityStone,quantity: 10, onSale: false},
+    {id:1, name: 'Power Stone', color: 'Purple',universe: 'Earth-616',image: imageStore.powerStone, quantity: 4, onSale: false},
+    {id:2, name: 'Time Stone', color: 'Green',universe: 'Earth-616',image: imageStore.timeStone,quantity: 0, onSale: false},
+    {id:3, name: 'Space Stone', color: 'Blue',universe: 'Earth-616',image: imageStore.spaceStone,quantity: 4, onSale: true},
+    {id:4, name: 'Mind Stone', color: 'Yellow',universe: 'Earth-616',image: imageStore.mindStone, quantity: 1, onSale: true},
+    {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone, quantity: 0, onSale: false}
     ]
 
 
@@ -64,8 +64,23 @@ let inStock = computed(()=>{
 
 })
 
+let saleItem = computed(()=>{
+    return variants[selectedVariant.value].onSale
 
-const onSale = false
+})
+
+
+const onSale = ref(true) 
+
+let sale = computed(() => {
+if(onSale.value == true){
+    return ` ${brand} ${product}: ${variants[selectedVariant.value].name} is on sale`
+}
+
+return ''
+})
+console.log('variants.name',variants)
+
 const sizes = ['S', 'M', 'L', 'XL']
 
 let devloperLinks = {
@@ -84,7 +99,7 @@ let devloperLinks = {
             <h1>{{ productBrand }}</h1>
             <p v-if="inStock">In Stock </p>
                 <p v-else>Out of Stock</p>
-                <p v-if="onSale"> On Sale </p>
+                <p v-if="saleItem"> {{ sale }} </p>
                 <ul>
                     <li v-for=" detail in details ">{{ detail }}</li>
                 </ul>
