@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import  ProductDetails  from '../components/ProductDetails.vue'
 
 import  ReviewForm  from '../components/ReviewForm.vue'
-
+import  ReviewList  from '../components/ReviewList.vue'
 
 // product-page\src\components\ProductDetails.vue
 
@@ -166,7 +166,8 @@ let devloperLinks = {
         <a :href="devloperLinks.marvelAPI">Marvel API</a>
     </div>
            <ReviewForm @reviewSubmitted="addReview"/>  
-          {{ reviews}}
+              <ReviewList :reviews="reviews"/>
+         
 
 </div>
 

@@ -12,12 +12,7 @@ export let productReview = ref(
 }
 
 )
-// export const onSubmit = () =>{
 
-//       productReview.value
-//     console.log(productReview.value)    
- 
-// }
 export default {}
 
 </script>
@@ -41,7 +36,7 @@ review: {
 
 // const emits = defineEmits(['reviewSubmitted', productReview.value])
 const onSubmit = () =>{
-
+//Had to duplicate code from above script tag to get the data passed down 
  let productReview = ref(
 {
         name: name.value,
