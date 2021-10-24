@@ -165,8 +165,9 @@ let devloperLinks = {
         </div>
         <a :href="devloperLinks.marvelAPI">Marvel API</a>
     </div>
+                  <ReviewList :reviews="reviews"/>
            <ReviewForm @reviewSubmitted="addReview"/>  
-              <ReviewList :reviews="reviews"/>
+
          
 
 </div>

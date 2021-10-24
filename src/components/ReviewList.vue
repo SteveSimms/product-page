@@ -12,8 +12,10 @@ console.log(props.reviews)
 <div class="review-container">
 <h3>Reviews:</h3>
 <ul>
-    <li v-for="review in props.reviews"  >
-        {{ review.review }}
+    <li v-for="(review, index) in props.reviews"  :key="index" >
+    {{ review.name }} gave this {{ review.rating }} stars
+    <br/>
+        "{{ review.review }}""
     </li>
 </ul>
 

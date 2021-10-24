@@ -47,6 +47,7 @@ const onSubmit = () =>{
      
     console.log(productReview.value)
       emits('reviewSubmitted', productReview.value)
+    document.querySelector('.review-form').reset()
  
 }
 
