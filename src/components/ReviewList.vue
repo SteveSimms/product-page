@@ -15,7 +15,9 @@ console.log(props.reviews)
     <li v-for="(review, index) in props.reviews"  :key="index" >
     {{ review.name }} gave this {{ review.rating }} stars
     <br/>
-        "{{ review.review }}""
+        "{{ review.review }}"
+        <br/>
+       Recommended: {{ review.recommendation}}
     </li>
 </ul>
 

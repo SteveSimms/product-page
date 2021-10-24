@@ -3,15 +3,19 @@ import { ref } from 'vue'
 export let name = ref('')
 export let review = ref('')
 export let rating = ref(0)
+export let recommendation = ref('')
 
 export let productReview = ref(
 {
         name: name.value,
         review: review.value,
-        rating: rating.value
+        rating: rating.value,
+        recommendation: recommendation.value
 }
 
 )
+
+
 
 export default {}
 
@@ -37,11 +41,17 @@ review: {
 // const emits = defineEmits(['reviewSubmitted', productReview.value])
 const onSubmit = () =>{
 //Had to duplicate code from above script tag to get the data passed down 
+if(name.value ===  '' || review.value === '' || rating.value === null){
+    alert('Review is incomplete. Please fill out every field.')
+    return
+
+}
  let productReview = ref(
 {
         name: name.value,
         review: review.value,
-        rating: rating.value
+        rating: rating.value,
+        recommendation: recommendation.value
 })
 
      
@@ -74,6 +84,8 @@ Leave A Review
 <option>1</option>
 
 </select>
+<label  for="name">Would you reccomend this product?</label> 
+<input v-model="recommendation" id="recommendation" type="text">
 <input  class="button" type="submit" value="Submit">
 
 </form> 
