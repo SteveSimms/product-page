@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-
-import ProductDisplay from './components/ProductDisplay.vue'
 import NavBar from './components/NavBar.vue'
+import ProductDisplay from './components/ProductDisplay.vue'
+
 let cart = ref([])
 let premium = true //passing premium to ProductDisplay component
 

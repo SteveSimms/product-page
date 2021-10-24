@@ -1,7 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import  ProductDetails  from '../components/ProductDetails.vue'
-import App from '../App.vue'
+
+import  ReviewForm  from '../components/ReviewForm.vue'
+
 
 // product-page\src\components\ProductDetails.vue
 
@@ -44,6 +46,14 @@ let variants = [
     {id:4, name: 'Mind Stone', color: 'Yellow',universe: 'Earth-616',image: imageStore.mindStone, quantity: 1, onSale: true},
     {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone, quantity: 0, onSale: false}
     ]
+    let  reviews =  ref([])
+
+    const addReview = (review) => {
+        reviews.value.push(review)
+        console.log(reviews.value)
+      
+    }
+
 // defineEmits from the component that you want to send the event from eventOrigin > eventName
 const emits = defineEmits(['addToCart','removeFromCart'])
 // Supposed to be emitting events 
@@ -124,7 +134,8 @@ let devloperLinks = {
 <div class="product-display">
     <div class="product-container">
         <div class="product-image">
-            <img :src="image"  :class="{'out-of-stock-img': !inStock  }">    
+            <img :src="image"  :class="{'out-of-stock-img': !inStock  }">  
+ 
         </div>
         <div class="product-info">
             <h1>{{ productBrand }}</h1>
@@ -150,10 +161,13 @@ let devloperLinks = {
                 :class="{disabledButton: !inStock}"
                 :disabled="!inStock" 
                 class="button">Add To Cart </button>
-                <button @click="removeFromCartHandler" class="button">Subtract Cart</button>
+                <button @click="removeFromCartHandler" class="button">Remove </button>
         </div>
         <a :href="devloperLinks.marvelAPI">Marvel API</a>
     </div>
+           <ReviewForm @reviewSubmitted="addReview"/>  
+          {{ reviews}}
+
 </div>
 
 
