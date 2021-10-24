@@ -3,25 +3,30 @@ import { ref } from 'vue'
 
 import ProductDisplay from './components/ProductDisplay.vue'
 import NavBar from './components/NavBar.vue'
-let cart = ref(0)
+let cart = ref([])
 let premium = true //passing premium to ProductDisplay component
 
-
-const getAddedItems = () =>{
-  cart.value++
+//function that houses our main logic
+const updateCart = (id) =>{
+  cart.value.push(id)
   console.log(cart.value)
   
 }
+
+const subtractFromCart = () =>{
+    cart.value--
+}
+
 //Sending the prop successfully
 </script>
 
 <template>
 <NavBar />
- <div  class="cart"> Cart({{ cart }})</div>
+ <div  class="cart"> Cart({{ cart.length }})</div>
 
-<ProductDisplay :premium="premium" @addTocart="getAddedItems"/> 
-<ProductDisplay @addTocart="getAddedItems"/>
-<ProductDisplay @addTocart="getAddedItems"/>
+<ProductDisplay :premium="premium" @addTocart="updateCart" @subtractFromCart="subtractFromCart"/> 
+<!-- <ProductDisplay @addTocart="getAddedItems" @subtractFromCart="subtractFromCart"/>
+<ProductDisplay @addTocart="getAddedItems" @subtractFromCart="subtractFromCart"/> -->
 
 </template>
 
