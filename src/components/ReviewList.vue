@@ -9,7 +9,7 @@ console.log(props.reviews)
 </script>
 
 <template>
-<div class="review-container">
+<div  class="review-container">
 <h3>Reviews:</h3>
 <ul>
     <li v-for="(review, index) in props.reviews"  :key="index" >
