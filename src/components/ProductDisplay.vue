@@ -45,19 +45,21 @@ let variants = [
     {id:5, name: 'Soul Stone', color: 'Orange',universe: 'Earth-616',image: imageStore.soulStone, quantity: 0, onSale: false}
     ]
 // defineEmits from the component that you want to send the event from eventOrigin > eventName
-const emits = defineEmits(['addToCart','subtractFromCart'])
+const emits = defineEmits(['addToCart','removeFromCart'])
 // Supposed to be emitting events 
 // event handler
 const addToCartHandler = () =>{
   // call this event with click handler where you need it 
      emits('addTocart', variants[selectedVariant.value].id)
-     console.log(variants[selectedVariant.value].id)
+   
 
 }
 
 
-const subtractFromCartHandler = () =>{
-    emits('subtractFromCart')
+const removeFromCartHandler = () =>{
+    // passing a payload(data) to the event
+    emits('removeFromCart',variants[selectedVariant.value].id)
+    
 }
 
 
@@ -148,7 +150,7 @@ let devloperLinks = {
                 :class="{disabledButton: !inStock}"
                 :disabled="!inStock" 
                 class="button">Add To Cart </button>
-                <button @click="subtractFromCartHandler" class="button">Subtract Cart</button>
+                <button @click="removeFromCartHandler" class="button">Subtract Cart</button>
         </div>
         <a :href="devloperLinks.marvelAPI">Marvel API</a>
     </div>

@@ -13,8 +13,8 @@ const updateCart = (id) =>{
   
 }
 
-const subtractFromCart = () =>{
-    cart.value--
+const removeFromCart = (id) =>{
+    cart.value.splice(id)
 }
 
 //Sending the prop successfully
@@ -24,7 +24,7 @@ const subtractFromCart = () =>{
 <NavBar />
  <div  class="cart"> Cart({{ cart.length }})</div>
 
-<ProductDisplay :premium="premium" @addTocart="updateCart" @subtractFromCart="subtractFromCart"/> 
+<ProductDisplay :premium="premium" @addTocart="updateCart" @removeFromCart="removeFromCart"/> 
 <!-- <ProductDisplay @addTocart="getAddedItems" @subtractFromCart="subtractFromCart"/>
 <ProductDisplay @addTocart="getAddedItems" @subtractFromCart="subtractFromCart"/> -->
 
